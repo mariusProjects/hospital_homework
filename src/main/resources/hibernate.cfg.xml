@@ -16,8 +16,14 @@
         <mapping class="com.sda.entities.Medication"/>
         <mapping class="com.sda.entities.Nurse"/>
         <mapping class="com.sda.entities.OnCall"/>
+        <mapping class="com.sda.entities.Patient"/>
         <mapping class="com.sda.entities.Physician"/>
-        <mapping class="com.sda.dao.PhysicianDao"/>
+        <mapping class="com.sda.entities.Prescribe"/>
+        <mapping class="com.sda.entities.Procedure"/>
+        <mapping class="com.sda.entities.Room"/>
+        <mapping class="com.sda.entities.Stay"/>
+        <mapping class="com.sda.entities.TrainedIn"/>
+        <mapping class="com.sda.entities.Undergoes"/>
 
     </session-factory>
 </hibernate-configuration>
