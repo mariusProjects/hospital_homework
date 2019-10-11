@@ -1,50 +1,63 @@
 package com.sda.entities;
 
+import com.sda.entities.compositeprimarykeys.BlockPK;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Objects;
 
+@Entity
+@Table(name = "block")
 public class Block {
-    @Id
-    @GenericGenerator(name = "gen", strategy = "increment")
-    @GeneratedValue(generator = "gen")
-    private Integer id;
-    @Column(name = "blockfloor")
-    private Integer blockfloor;
-    @Column(name = "blockcode")
-    private Integer blockcode;
 
-    public Block(Integer id, Integer blockfloor, Integer blockcode) {
-        this.id = id;
-        this.blockfloor = blockfloor;
-        this.blockcode = blockcode;
+
+    @EmbeddedId
+    private BlockPK blockPK;
+
+
+    @ManyToOne
+    @MapsId("blockfloor")
+    @JoinColumn(name = "blockfloor")
+    private OnCall onCallBlockFloor;
+
+    @ManyToOne
+    @MapsId("blockcode")
+    @JoinColumn(name = "blockcode")
+    private OnCall onCallBlockCode;
+
+    @ManyToOne
+    @JoinColumn(name = "onCallPK")
+    private OnCall onCalll;
+
+
+
+
+
+    public Block() {
     }
 
-    public Block() {}
-
-    public Integer getId() {
-        return id;
+    public Block(BlockPK blockPK) {
+        this.blockPK = blockPK;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public BlockPK getBlockPK() {
+        return blockPK;
     }
 
-    public Integer getBlockfloor() {
-        return blockfloor;
+    public void setBlockPK(BlockPK blockPK) {
+        this.blockPK = blockPK;
     }
 
-    public void setBlockfloor(Integer blockfloor) {
-        this.blockfloor = blockfloor;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Block block = (Block) o;
+        return Objects.equals(blockPK, block.blockPK);
     }
 
-    public Integer getBlockcode() {
-        return blockcode;
-    }
-
-    public void setBlockcode(Integer blockcode) {
-        this.blockcode = blockcode;
+    @Override
+    public int hashCode() {
+        return Objects.hash(blockPK);
     }
 }

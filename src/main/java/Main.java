@@ -1,17 +1,36 @@
+import com.sda.dao.AffiliatedWithDao;
+import com.sda.dao.PhysicianDao;
 import com.sda.entities.*;
-import com.sda.util.HibernateUtil;
+import com.sda.entities.compositeprimarykeys.AffiliatedWithPK;
+import com.sda.entities.compositeprimarykeys.TrainedInIdPK;
+import com.sda.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import java.sql.Date;
+
 public class Main {
-    private static SessionFactory sessionFactory;
+
     public static void main(String[] args) {
 
-        sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
 
-        Physician physician1= new Physician();
+
+        PhysicianDao physicianDao = new PhysicianDao();
+        physicianDao.addPhysician(1,"marius","dentist",22);
+
+        AffiliatedWithDao affiliatedWithDao = new AffiliatedWithDao();
+        affiliatedWithDao.addAffiliatedWith(new AffiliatedWithPK(2,3),true);
+
+
+
+
+
+
+
+
+
+
+        /*Physician physician1= new Physician();
         Physician physician2= new Physician();
 
         physician1.setName("David");
@@ -21,7 +40,14 @@ public class Main {
         physician2.setPosition("Dentist");
         physician2.setSsn(4455);
 
+        Procedure treatment1 = new Procedure(2,"teatment1",2d);
 
+        TrainedIn trainedIn1 = new TrainedIn();
+        TrainedIn trainedIn2 = new TrainedIn();
+
+        trainedIn1.setTrainedInIdPK(new TrainedInIdPK(physician1,treatment1));
+        trainedIn1.setCertificationDate(new Date(20-9-2019));
+        trainedIn1.setCertificationExpires(new Date(22-9-2019));
 
         Nurse nurse1 = new Nurse();
         Nurse nurse2 = new Nurse();
@@ -63,6 +89,7 @@ public class Main {
         AffiliatedWith affiliatedWith1 = new AffiliatedWith();
         AffiliatedWith affiliatedWith2 = new AffiliatedWith();
 
+
         affiliatedWith1.setPhysician(physician2);
         affiliatedWith1.setDepartment(department1);
         affiliatedWith1.setPrimaryAffiliation(true);
@@ -94,5 +121,6 @@ public class Main {
         session.getTransaction().commit();
         session.close();
         sessionFactory.close();
+    }*/
     }
 }

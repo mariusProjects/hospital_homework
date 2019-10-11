@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 @Table(name = "appointments")
@@ -77,5 +78,23 @@ public class Appointment {
 
     public void setEndDateTime(Timestamp endDateTime) {
         this.endDateTime = endDateTime;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Appointment that = (Appointment) o;
+        return Objects.equals(appointmentId, that.appointmentId) &&
+                Objects.equals(patient, that.patient) &&
+                Objects.equals(prepnurse, that.prepnurse) &&
+                Objects.equals(physician, that.physician) &&
+                Objects.equals(startDateTime, that.startDateTime) &&
+                Objects.equals(endDateTime, that.endDateTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(appointmentId, patient, prepnurse, physician, startDateTime, endDateTime);
     }
 }

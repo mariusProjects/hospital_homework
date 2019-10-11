@@ -3,6 +3,7 @@ package com.sda.entities;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "patients")
@@ -10,6 +11,7 @@ public class Patient {
     @Id
     @GenericGenerator(name = "gen", strategy = "increment")
     @GeneratedValue(generator = "gen")
+    @Column(name = "ssn")
     private Integer ssn;
 
     @Column(name = "`name`")
@@ -23,10 +25,23 @@ public class Patient {
 
     @Column(name = "insurance_id")
     private Integer insuranceId;
+
     @ManyToOne
     @JoinColumn(name = "pcp_physician_id")
-    private Physician physician;
+    private Physician pcpPhysicianId;
 
+
+    public Patient() {
+    }
+
+    public Patient(Integer ssn, String name, String adress, String phone, Integer insuranceId, Physician pcpPhysicianId) {
+        this.ssn = ssn;
+        this.name = name;
+        this.adress = adress;
+        this.phone = phone;
+        this.insuranceId = insuranceId;
+        this.pcpPhysicianId = pcpPhysicianId;
+    }
 
     public Integer getSsn() {
         return ssn;
@@ -68,11 +83,29 @@ public class Patient {
         this.insuranceId = insuranceId;
     }
 
-    public Physician getPhysician() {
-        return physician;
+    public Physician getPcpPhysicianId() {
+        return pcpPhysicianId;
     }
 
-    public void setPhysician(Physician physician) {
-        this.physician = physician;
+    public void setPcpPhysicianId(Physician pcpPhysicianId) {
+        this.pcpPhysicianId = pcpPhysicianId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Patient patient = (Patient) o;
+        return Objects.equals(ssn, patient.ssn) &&
+                Objects.equals(name, patient.name) &&
+                Objects.equals(adress, patient.adress) &&
+                Objects.equals(phone, patient.phone) &&
+                Objects.equals(insuranceId, patient.insuranceId) &&
+                Objects.equals(pcpPhysicianId, patient.pcpPhysicianId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ssn, name, adress, phone, insuranceId, pcpPhysicianId);
     }
 }

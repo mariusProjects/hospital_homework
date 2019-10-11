@@ -16,4 +16,9 @@ public class Procedure {
     @Column(name = "cost")
     private Double cost;
 
+    public Procedure(Integer code, String name, Double cost) {
+        this.code = code;
+        this.name = name;
+        this.cost = cost;
+    }
 }

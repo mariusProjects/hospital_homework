@@ -16,6 +16,8 @@
         <mapping class="com.sda.entities.Medication"/>
         <mapping class="com.sda.entities.Nurse"/>
         <mapping class="com.sda.entities.OnCall"/>
+        <mapping class="com.sda.entities.Physician"/>
+        <mapping class="com.sda.dao.PhysicianDao"/>
 
     </session-factory>
 </hibernate-configuration>
